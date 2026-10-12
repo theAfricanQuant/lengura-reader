@@ -21,7 +21,33 @@
     {
       "speaker": "Milica",
       "de": "Also, ich war ganz sicher, dass ich in eine Stadt gehen wollte, die auch Strand und Meer und Sonne hat, weil ich das zu Hause nicht habe ... in Deutschland. Und genau! Barcelona war für mich leider keine Wahl, weil Barcelona einfach zu groß ist ... zu touristisch und ich wollte in einer Stadt leben, die einfach ein bisschen kleiner ist ... ein bisschen intimer und ja, dann habe ich mich für Valencia entschieden.",
-      "en": "Well, I was sure I wanted to go to a city with a beach, the sea, and sunshine, because I don't have those at home in Germany. And Barcelona wasn't an option for me, unfortunately, because it's simply too big and too touristy. I wanted to live in a city that was a little smaller, a little more intimate, so I chose Valencia."
+      "en": "Well, I was sure I wanted to go to a city with a beach, the sea, and sunshine, because I don't have those at home in Germany. And Barcelona wasn't an option for me, unfortunately, because it's simply too big and too touristy. I wanted to live in a city that was a little smaller, a little more intimate, so I chose Valencia.",
+      "pairs": [
+        {
+          "de": "Also, ich war ganz sicher, dass ich in eine Stadt gehen wollte,",
+          "en": "Well, I was sure I wanted to go to a city"
+        },
+        {
+          "de": "die auch Strand und Meer und Sonne hat, weil ich das zu Hause nicht habe ... in Deutschland.",
+          "en": "with a beach, the sea, and sunshine, because I don't have those at home in Germany."
+        },
+        {
+          "de": "Und genau! Barcelona war für mich leider keine Wahl,",
+          "en": "And Barcelona wasn't an option for me, unfortunately,"
+        },
+        {
+          "de": "weil Barcelona einfach zu groß ist ... zu touristisch",
+          "en": "because it's simply too big and too touristy."
+        },
+        {
+          "de": "und ich wollte in einer Stadt leben, die einfach ein bisschen kleiner ist ... ein bisschen intimer",
+          "en": "I wanted to live in a city that was a little smaller, a little more intimate"
+        },
+        {
+          "de": "und ja, dann habe ich mich für Valencia entschieden.",
+          "en": "so I chose Valencia."
+        }
+      ]
     },
     {
       "speaker": "Henry",

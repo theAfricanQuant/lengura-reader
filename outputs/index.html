@@ -72,7 +72,8 @@
       const sentenceParts=[...new Intl.Segmenter(locale,{granularity:'sentence'}).segment(text)].map(part=>part.segment.trim()).filter(Boolean).flatMap(sentence=>sentence.split(/(?<=…)|(?<=\.{3})\s+(?=[A-ZÄÖÜ„])/).map(part=>part.trim()).filter(Boolean));
       return sentenceParts.flatMap(sentence=>sentence.split(/(?<=[.!?])\s+(?=[A-ZÄÖÜ„“])|(?<=[;:—])\s+|\s+[—–]\s+/).map(part=>part.trim()).filter(Boolean));
     }
-    function pairedChunks(de,en){
+    function pairedChunks(de,en,manualPairs){
+      if(Array.isArray(manualPairs)&&manualPairs.length)return manualPairs;
       const deParts=splitSentences(de,'de'),enParts=splitSentences(en,'en'),n=deParts.length,m=enParts.length;
       const score=Array.from({length:n+1},()=>Array(m+1).fill(Infinity)),back=Array.from({length:n+1},()=>Array(m+1).fill(null));score[0][0]=0;
       const dl=deParts.map(x=>x.length),el=enParts.map(x=>x.length),dt=dl.reduce((a,b)=>a+b,0),et=el.reduce((a,b)=>a+b,0);
@@ -85,7 +86,7 @@
     function render(){
       const q=search.value.trim().toLocaleLowerCase();
       visible=lines.map((line,index)=>({line,index})).filter(({line})=>!q||`${line.speaker} ${line.de} ${line.en}`.toLocaleLowerCase().includes(q));
-      list.innerHTML=visible.length?visible.map(({line,index})=>`<article class="turn ${index===selected?'selected':''} ${known.has(index)?'known':''}" data-index="${index}" tabindex="0" role="button" aria-label="Select line ${index+1}"><span class="turn-number">${String(index+1).padStart(2,'0')}</span><div class="speaker">${esc(line.speaker)} <button class="known-btn" data-known="${index}" aria-label="Mark as learned">${known.has(index)?'✓ learned':'Mark learned'}</button></div>${pairedChunks(line.de,line.en).map(pair=>`<div class="pair-chunk"><div class="german">${esc(pair.de)}</div><div class="english ${showEnglish?'':'hidden'}">${esc(pair.en)}</div></div>`).join('')}</article>`).join(''):'<div class="empty">No matching lines. Try another word.</div>';
+      list.innerHTML=visible.length?visible.map(({line,index})=>`<article class="turn ${index===selected?'selected':''} ${known.has(index)?'known':''}" data-index="${index}" tabindex="0" role="button" aria-label="Select line ${index+1}"><span class="turn-number">${String(index+1).padStart(2,'0')}</span><div class="speaker">${esc(line.speaker)} <button class="known-btn" data-known="${index}" aria-label="Mark as learned">${known.has(index)?'✓ learned':'Mark learned'}</button></div>${pairedChunks(line.de,line.en,line.pairs).map(pair=>`<div class="pair-chunk"><div class="german">${esc(pair.de)}</div><div class="english ${showEnglish?'':'hidden'}">${esc(pair.en)}</div></div>`).join('')}</article>`).join(''):'<div class="empty">No matching lines. Try another word.</div>';
       document.getElementById('visible-count').textContent=visible.length;
       document.getElementById('position').textContent=`${selected+1} / ${lines.length}`;
       document.getElementById('learned-count').textContent=known.size;
