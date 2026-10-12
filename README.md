@@ -12,10 +12,10 @@ The server binds to localhost only and serves this repository plus sibling Germa
 
 ## What works now
 
-- Catalog of 15 A2–B2 candidate lessons with level filters and search.
-- Full 191-turn transcript for “Conversation in German B1–B2,” with speaker labels, video, transcript search, previous/next navigation, translation toggle, and learned-line marks saved in the browser.
-- Franklin notes panel: write keywords/reconstruction notes; saved locally in the browser, printable, and linked to the Franklin workbook.
-- Personal shortcuts to the Franklin workbook, the 50-pattern practice app, and the B1 roadmap.
+- Catalog of 15 A2–B2 lessons with level filters and search. Each **Study video** link opens the reader with that lesson’s embedded video and a direct link to Lengura’s transcript page.
+- Full 191-turn transcript for “Conversation with Native Speakers: Life in Spain,” with speaker labels, bilingual draft, transcript search, previous/next navigation, translation toggle, and learned-line marks saved in the browser.
+- The other 14 transcripts remain on Lengura and open from their official source links; they are not copied into the repo.
+- Franklin notes panel for the locally included transcript; notes save in this browser and are printable.
 
 ## Content and limits
 

@@ -35,13 +35,13 @@
   <main>
     <nav class="crumb" aria-label="Breadcrumb"><span>Library</span><span class="dot">›</span><span>Conversations</span><span class="dot">›</span><strong>Spain & everyday life</strong></nav>
     <section class="heading">
-      <div><p class="eyebrow">Listen · Read · Understand</p><h1>Life in Spain, through two voices</h1><p class="subhead">Complete transcript · 191 turns. Built for your B1 practice: listen, read, then reconstruct.</p></div>
+      <div><p class="eyebrow">Listen · Read · Understand</p><h1 id="page-title">Life in Spain, through two voices</h1><p class="subhead" id="page-subtitle">Complete transcript · 191 turns. Built for your B1 practice: listen, read, then reconstruct.</p></div>
       <span class="level">GERMAN · B1–B2</span>
     </section>
     <section class="workspace" aria-label="Video and transcript">
       <div class="video-column">
         <article class="video-card">
-          <div class="video-frame"><iframe src="https://www.youtube.com/embed/WBsOY6BDojs?rel=0" title="Conversation in German B1-B2 with Native Speakers" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="video-frame"><iframe id="youtube-player" src="https://www.youtube-nocookie.com/embed/WBsOY6BDojs?rel=0&playsinline=1" title="Conversation in German B1-B2 with Native Speakers" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></div>
           <div class="video-meta"><div class="video-meta-top"><h2>Conversation in German B1–B2</h2><a class="open-youtube" href="https://youtu.be/WBsOY6BDojs" target="_blank" rel="noreferrer">Open on YouTube ↗</a></div><p>Milica and Henry talk about living in Spain</p></div>
           <div class="video-note"><b>Study tip</b> &nbsp;Read a line, listen for it in the video, then say it aloud.</div>
         </article>
@@ -83,12 +83,43 @@
     function select(index){selected=Math.max(0,Math.min(lines.length-1,index));render();const active=list.querySelector('.selected');if(active)active.scrollIntoView({block:'nearest',behavior:'smooth'})}
     async function init(){
       try{
+        const params=new URLSearchParams(location.search);
+        const video=params.get('video');
+        const title=params.get('title');
+        const source=params.get('page');
+        const allowedVideo=/^[A-Za-z0-9_-]{11}$/;
+        if(video){
+          if(!allowedVideo.test(video)) throw Error('Invalid YouTube video ID.');
+          const label=title||'German conversation';
+          document.getElementById('youtube-player').src=`https://www.youtube-nocookie.com/embed/${video}?rel=0&playsinline=1`;
+          document.getElementById('youtube-player').title=label;
+          document.querySelector('.open-youtube').href=`https://www.youtube.com/watch?v=${encodeURIComponent(video)}`;
+          document.querySelector('.video-meta h2').textContent=label;
+          document.getElementById('page-title').textContent=label;
+          document.querySelector('.crumb strong').textContent=label;
+          if(source && /^https:\/\/lengura\.de\//.test(source)){
+            const link=document.querySelector('.footnote a');link.href=source;link.textContent='Open full transcript on Lengura ↗';
+          }else if(video!=='WBsOY6BDojs'){
+            document.querySelector('.footnote a').hidden=true;
+          }
+          if(video!=='WBsOY6BDojs'){
+            document.getElementById('page-subtitle').textContent='Video player with a direct link to Lengura’s published transcript.';
+            document.getElementById('turn-list').innerHTML='<div class="empty">This lesson’s complete transcript is published on Lengura. Open the source link below to read it; this reader does not host a copied transcript.</div>';
+            document.getElementById('source-note').textContent='Transcript remains on Lengura’s source page.';
+            document.getElementById('load-state').textContent='Use the source transcript link above while watching the embedded video.';
+            document.getElementById('search').disabled=true;
+            document.getElementById('translation-toggle').disabled=true;
+            document.getElementById('prev').disabled=true;document.getElementById('next').disabled=true;
+            document.getElementById('visible-count').textContent='0';document.getElementById('position').textContent='—';
+            return;
+          }
+        }
         const r=await fetch('./transcript.json');if(!r.ok)throw Error(`Transcript file returned ${r.status}`);
         const data=await r.json();lines=data.turns;
         document.getElementById('source-note').textContent=`${lines.length} transcript turns · English machine-translation draft · ${data.translation_note}`;
         document.getElementById('load-state').textContent=`Full conversation loaded: ${lines.length} turns.`;
         render();
-      }catch(e){document.getElementById('turn-list').innerHTML=`<div class="empty">Transcript could not load. Serve this folder with <code>./start-local.sh</code>. (${esc(e.message)})</div>`}
+      }catch(e){document.getElementById('turn-list').innerHTML=`<div class="empty">Reader could not load. Open the catalog again and choose a lesson. (${esc(e.message)})</div>`}
     }
     search.addEventListener('input',render);
     document.getElementById('translation-toggle').addEventListener('click',e=>{showEnglish=!showEnglish;e.currentTarget.textContent=showEnglish?'Hide translations':'Show translations';render()});

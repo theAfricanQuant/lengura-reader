@@ -5,20 +5,19 @@ This is Ricky’s personal German study desk, not a generic public product. Prio
 
 ## UX / content
 - Catalog Lengura A2–B2 lessons with search and level filters.
-- Pair full German transcript turns with English immediately below; retain speaker labels.
-- Clearly identify source, transcript completeness, and whether English is machine-translated or reviewed.
-- Reader: video + transcript, search, navigation, translation toggle, learned-line progress, Franklin notes.
-- Keep it responsive and easy to run locally. Avoid presenting the 15-link catalog as 15 completed readers.
+- Every lesson has a reader deep link with a privacy-enhanced YouTube embed and official source-transcript link.
+- Only the Life in Spain lesson has a local transcript. Do not bulk-copy full source transcripts from Lengura into this repo; link to the originals unless permission to redistribute is documented.
+- Label machine-translated English as draft. Preserve speaker labels and source attribution.
+- Keep the reader responsive and local-first; do not claim all catalog entries have local transcripts.
 
 ## Current state
-- `outputs/catalog.html`: 15 candidate links; personal B1 target and shortcuts.
-- `outputs/index.html`: responsive reader for “Conversation in German B1–B2.”
-- `outputs/transcript.json`: full 191-turn German transcript and English draft translations.
-- `outputs/start-local.sh`: local HTTP server on 127.0.0.1:8766, serving from the parent volume root so sibling study materials are linkable.
-- `PROJECT_BRIEF.md` and README document remaining gaps.
+- `outputs/catalog.html`: 15 source links and per-lesson reader deep links.
+- `outputs/index.html`: dynamic video embed for each selected lesson; local bilingual transcript for the Life in Spain video only.
+- `outputs/transcript.json`: 191-turn German transcript and English draft for that one lesson.
+- `outputs/start-local.sh`: localhost server at 127.0.0.1:8766.
 
 ## Working direction
-- Verify source against video before correcting substantive German; disclose obvious normalization.
-- Proofread machine-translated English before calling translations finished.
-- For each new reader, source and validate full transcript; test every control in a browser.
-- Keep the app static and quick to use; update catalog, docs, and current-state notes together.
+- Validate video IDs and embed fallback. YouTube may still restrict embedding per video.
+- Keep official transcript pages directly linked for the other videos.
+- Proofread machine translations before calling them finished.
+- Keep the app static; test catalog filters, per-video embeds, transcript and source links.

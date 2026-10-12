@@ -2,8 +2,6 @@
 
 Run `./start-local.sh` from this folder, then open `http://127.0.0.1:8766/lengura-reader/outputs/catalog.html`. The server is localhost-only and serves the repository plus sibling German-learning files so the personal shortcuts work. Port 8766 avoids the service using 8765.
 
-The catalog contains 15 candidate Lengura videos at A2–B2 with filters and search. These are source links, not 15 finished local readers.
+The catalog has 15 video entries. Choose **Study video** to open the video inside the reader, or **Full transcript** to read Lengura’s original transcript page. The reader offers a local bilingual 191-turn transcript only for “Conversation with Native Speakers: Life in Spain”; the other source transcripts remain on Lengura and are linked directly rather than copied into this repository.
 
-Open `index.html` from the catalog for the full 191-turn B1–B2 conversation, video, bilingual transcript, search, translation toggle, line navigation, learned-line marks, and a Franklin notes area. Your notes and learned marks stay in this browser. The opening 18 English translations are retained from the previous reader; the remaining translations are machine-generated drafts and need review. The German source has occasional transcription issues and was only normalized for obvious extraction/spacing artifacts.
-
-YouTube and Lengura still require internet. Transcript turn selection does not seek the player because the source transcript has no timestamps. For your other study material, the catalog links to your Franklin workbook, 50-pattern practice app, and B1 roadmap.
+The embedded players use YouTube’s privacy-enhanced embed host. YouTube and Lengura need an internet connection. If an uploader disables embedding for a particular video, use **Open on YouTube** from the reader. English for the 191-turn local transcript is partly machine-translated draft text and should be checked for nuance.
