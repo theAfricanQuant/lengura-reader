@@ -113,7 +113,25 @@
     {
       "speaker": "Milica",
       "de": "Ja, ganz viele Dinge, also ich war sehr überrascht von dem wunderschönen historischen Stadtzentrum mit ganz vielen alten Gebäuden ...",
-      "en": "Yes, a lot of things, so I was very surprised by the beautiful historic city center with lots of old buildings..."
+      "en": "Yes, a lot of things, so I was very surprised by the beautiful historic city center with lots of old buildings...",
+      "pairs": [
+        {
+          "de": "Ja, ganz viele Dinge,",
+          "en": "Yes, a lot of things,"
+        },
+        {
+          "de": "also ich war sehr überrascht",
+          "en": "I was very surprised"
+        },
+        {
+          "de": "von dem wunderschönen historischen Stadtzentrum",
+          "en": "by the beautiful historic city center"
+        },
+        {
+          "de": "mit ganz vielen alten Gebäuden ...",
+          "en": "with lots of old buildings..."
+        }
+      ]
     },
     {
       "speaker": "Henry",
