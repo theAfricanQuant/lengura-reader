@@ -67,7 +67,33 @@
     {
       "speaker": "Milica",
       "de": "Genau, ja! Also, ich wollte schon, dass es eine größere Stadt ist als meine Heimatstadt in Deutschland, weil … ich komme aus Mainz. Mainz ist sehr klein und ich wollte eine Stadt haben, die ein bisschen größer ist, aber eben nicht zu groß und Valencia war da eine gute Wahl.",
-      "en": "Exactly, yes! Well, I wanted it to be a bigger city than my hometown in Germany because... I'm from Mainz. Mainz is very small and I wanted a city that was a little bigger, but not too big, and Valencia was a good choice."
+      "en": "Exactly, yes! Well, I wanted it to be a bigger city than my hometown in Germany because... I'm from Mainz. Mainz is very small and I wanted a city that was a little bigger, but not too big, and Valencia was a good choice.",
+      "pairs": [
+        {
+          "de": "Genau, ja!",
+          "en": "Exactly, yes!"
+        },
+        {
+          "de": "Also, ich wollte schon, dass es eine größere Stadt ist als meine Heimatstadt in Deutschland,",
+          "en": "Well, I wanted it to be a bigger city than my hometown in Germany,"
+        },
+        {
+          "de": "weil … ich komme aus Mainz.",
+          "en": "because… I'm from Mainz."
+        },
+        {
+          "de": "Mainz ist sehr klein",
+          "en": "Mainz is very small"
+        },
+        {
+          "de": "und ich wollte eine Stadt haben, die ein bisschen größer ist, aber eben nicht zu groß",
+          "en": "and I wanted a city that was a little bigger, but not too big"
+        },
+        {
+          "de": "und Valencia war da eine gute Wahl.",
+          "en": "and Valencia was a good choice."
+        }
+      ]
     },
     {
       "speaker": "Henry",
