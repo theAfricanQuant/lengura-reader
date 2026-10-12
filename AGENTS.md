@@ -1,33 +1,24 @@
 # Project expectations
 
 ## Purpose
+This is Ricky’s personal German study desk, not a generic public product. Prioritize his A2→B1 learning, Goethe B1 exam preparation, and Franklin-style reconstruction workflow.
 
-Build a local German-learning website around Lengura lessons for A2, B1, and B2 learners.
+## UX / content
+- Catalog Lengura A2–B2 lessons with search and level filters.
+- Pair full German transcript turns with English immediately below; retain speaker labels.
+- Clearly identify source, transcript completeness, and whether English is machine-translated or reviewed.
+- Reader: video + transcript, search, navigation, translation toggle, learned-line progress, Franklin notes.
+- Keep it responsive and easy to run locally. Avoid presenting the 15-link catalog as 15 completed readers.
 
-## User experience
-
-- Organize all matching video lessons in a browsable library with A2, B1, and B2 access.
-- Keep the video on the left and the transcript and study controls on the right on wide screens; make the layout usable on smaller screens too.
-- Present each German sentence with its English translation immediately below it.
-- Keep the transcript aligned with the video so learners can follow along and practice speaking.
-- Make the local site easy to open and use from the user's German-learning folder.
-
-## Content expectations
-
-- Include the complete transcript for each lesson selected for the reader, not an opening excerpt presented as the whole lesson.
-- Keep German wording and English translations paired sentence by sentence.
-- Preserve speaker labels and readable paragraph breaks.
-- Clearly identify lesson level, title, video, and transcript source.
-
-## Current project state
-
-- `outputs/catalog.html` is a local catalog of 15 Lengura lessons labeled A2, B1, or B2, with level filters and links to their videos and transcript pages.
-- `outputs/index.html` is the side-by-side reader for “Conversation in German B1–B2,” with the video on the left and an English-translated opening excerpt of 18 turns on the right.
-- `outputs/start-local.sh` starts a local HTTP server, and `outputs/README.md` explains how to use the pages.
-- The catalog and reader are static HTML and currently need an internet connection for YouTube and Lengura source pages.
+## Current state
+- `outputs/catalog.html`: 15 candidate links; personal B1 target and shortcuts.
+- `outputs/index.html`: responsive reader for “Conversation in German B1–B2.”
+- `outputs/transcript.json`: full 191-turn German transcript and English draft translations.
+- `outputs/start-local.sh`: local HTTP server on 127.0.0.1:8766, serving from the parent volume root so sibling study materials are linkable.
+- `PROJECT_BRIEF.md` and README document remaining gaps.
 
 ## Working direction
-
-- Keep the site simple, readable, and quick to run locally.
-- Keep source links visible and make incomplete transcript coverage clear in the interface and documentation.
-- Update the catalog, reader, and setup notes together as the collection grows.
+- Verify source against video before correcting substantive German; disclose obvious normalization.
+- Proofread machine-translated English before calling translations finished.
+- For each new reader, source and validate full transcript; test every control in a browser.
+- Keep the app static and quick to use; update catalog, docs, and current-state notes together.
