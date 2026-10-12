@@ -4,4 +4,4 @@ Run `./start-local.sh` from this folder, then open `http://127.0.0.1:8766/lengur
 
 The catalog has 15 video entries. Choose **Study video** to open the video inside the reader, or **Full transcript** to read Lengura’s original transcript page. The reader offers a local bilingual 191-turn transcript only for “Conversation with Native Speakers: Life in Spain”; the other source transcripts remain on Lengura and are linked directly rather than copied into this repository.
 
-The embedded players use YouTube’s privacy-enhanced embed host. YouTube and Lengura need an internet connection. If an uploader disables embedding for a particular video, use **Open on YouTube** from the reader. English for the 191-turn local transcript is partly machine-translated draft text and should be checked for nuance.
+The embedded players use YouTube’s privacy-enhanced embed host. YouTube and Lengura need an internet connection. If an uploader disables embedding for a particular video, use **Open on YouTube** from the reader. The English translation for the local 191-turn transcript has been reviewed; the paired source link remains available for checking context and nuance.

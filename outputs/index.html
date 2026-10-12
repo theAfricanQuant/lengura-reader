@@ -116,7 +116,7 @@
         }
         const r=await fetch('./transcript.json');if(!r.ok)throw Error(`Transcript file returned ${r.status}`);
         const data=await r.json();lines=data.turns;
-        document.getElementById('source-note').textContent=`${lines.length} transcript turns · English machine-translation draft · ${data.translation_note}`;
+        document.getElementById('source-note').textContent=`${lines.length} transcript turns · reviewed English translation · ${data.translation_note}`;
         document.getElementById('load-state').textContent=`Full conversation loaded: ${lines.length} turns.`;
         render();
       }catch(e){document.getElementById('turn-list').innerHTML=`<div class="empty">Reader could not load. Open the catalog again and choose a lesson. (${esc(e.message)})</div>`}
