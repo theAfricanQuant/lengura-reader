@@ -10,12 +10,15 @@ From this folder, run `./outputs/start-local.sh`, then open:
 
 The server binds to localhost only and serves this repository plus sibling German study materials from `/mnt/HC_Volume_106515957/`. It uses port 8766 to avoid the existing local service on 8765. Stop with Ctrl+C.
 
+Open the reader through this local HTTP server. Opening `outputs/index.html` directly as a `file://` page cannot provide YouTube with the required HTTP referrer, so the app shows a launch hint instead of a broken player.
+
 ## What works now
 
 - Catalog of 15 A2–B2 lessons with level filters and search. Each **Study video** link opens the reader with that lesson’s embedded video and a direct link to Lengura’s transcript page.
 - Full 191-turn transcript for “Conversation with Native Speakers: Life in Spain,” with speaker labels, reviewed English translation, transcript search, previous/next navigation, translation toggle, and learned-line marks saved in the browser.
 - The other 14 transcripts remain on Lengura and open from their official source links; they are not copied into the repo.
 - Franklin notes panel for the locally included transcript; notes save in this browser and are printable.
+- Privacy-enhanced YouTube embeds include the app origin and use the recommended cross-origin referrer policy. The reader keeps a direct **Open on YouTube** fallback.
 
 ## Content and limits
 

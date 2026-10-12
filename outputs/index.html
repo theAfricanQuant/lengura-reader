@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#f5f4ed" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Lengura — Listen & Read</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap');
@@ -15,7 +16,7 @@
     main{max-width:1460px;margin:auto;padding:30px clamp(20px,4vw,64px) 48px}.crumb{display:flex;align-items:center;gap:9px;color:#859087;font-size:12px;margin-bottom:23px}.crumb strong{color:#4c5a51;font-weight:600}.crumb .dot{font-size:16px;color:#b9c0b8}
     .heading{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:23px}.eyebrow{font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin:0 0 8px}.heading h1{font:600 clamp(26px,3.2vw,39px)/1.1 var(--serif);letter-spacing:-.035em;margin:0}.subhead{margin:9px 0 0;color:#7c867e;font-size:13px}.level{white-space:nowrap;padding:8px 12px;border:1px solid #d8e1d8;border-radius:999px;background:#eef3ec;color:var(--green);font:11px var(--mono)}
     .workspace{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr);gap:18px;align-items:start}.video-column{position:sticky;top:18px;min-width:0}.video-card,.transcript-card{min-width:0;background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 6px 24px rgba(36,54,43,.035)}
-    .video-frame{position:relative;aspect-ratio:16/9;background:#13231d}.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.video-meta{padding:17px 19px 16px}.video-meta-top{display:flex;justify-content:space-between;align-items:center;gap:10px}.video-meta h2{font:600 17px var(--serif);margin:0;letter-spacing:-.02em}.open-youtube{font-size:11px;color:var(--green);text-decoration:none;font-weight:600}.open-youtube:hover{text-decoration:underline}.video-meta p{margin:6px 0 0;color:#818a82;font-size:12px}.video-note{border-top:1px solid var(--line);padding:12px 19px;color:#7d877f;font-size:11px;line-height:1.55}.video-note b{color:#4d5a50;font-weight:600}
+    .video-frame{position:relative;aspect-ratio:16/9;background:#13231d}.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.video-frame iframe[hidden]{display:none}.player-hint{position:absolute;inset:0;display:grid;align-content:center;justify-items:center;gap:11px;padding:24px;background:#17241f;color:#f7f5ed;text-align:center;font-size:13px;line-height:1.55}.player-hint[hidden]{display:none}.player-hint a{color:#fff;background:#25634c;padding:9px 13px;border-radius:8px;text-decoration:none;font-weight:700}.video-meta{padding:17px 19px 16px}.video-meta-top{display:flex;justify-content:space-between;align-items:center;gap:10px}.video-meta h2{font:600 17px var(--serif);margin:0;letter-spacing:-.02em}.open-youtube{font-size:11px;color:var(--green);text-decoration:none;font-weight:600}.open-youtube:hover{text-decoration:underline}.video-meta p{margin:6px 0 0;color:#818a82;font-size:12px}.video-note{border-top:1px solid var(--line);padding:12px 19px;color:#7d877f;font-size:11px;line-height:1.55}.video-note b{color:#4d5a50;font-weight:600}.embed-status{display:block;margin-top:7px;color:#8b5630}.embed-status[hidden]{display:none}
     .study-tools{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 15px;border-bottom:1px solid var(--line);background:#fdfcf7}.count{font:11px var(--mono);color:#7b867e}.count b{color:var(--green);font-weight:500}.tool-actions{display:flex;align-items:center;gap:7px}.tool-btn{border:1px solid var(--line);background:#fffefa;color:#5e6b61;border-radius:8px;padding:7px 10px;font-size:11px}.tool-btn:hover{border-color:#b7cbbd;color:var(--green)}
     .search-wrap{position:relative;padding:12px 15px 2px}.search-wrap:before{content:'⌕';position:absolute;left:27px;top:20px;color:#89938b;font-size:17px}.search{width:100%;border:1px solid #e7e8e0;background:#faf9f3;border-radius:9px;padding:10px 12px 10px 33px;outline:none;font-size:12px;color:var(--ink)}.search:focus{border-color:#98b6a3;box-shadow:0 0 0 3px #e7f0e9}
     .turn-list{padding:8px 15px 15px;max-height:calc(100vh - 270px);min-height:380px;overflow:auto;scrollbar-color:#d8ded7 transparent;scrollbar-width:thin}.turn{position:relative;padding:13px 13px 12px 38px;border-bottom:1px solid #eff0ea;border-radius:9px;transition:background .18s;cursor:pointer}.turn:last-child{border-bottom:0}.turn:hover{background:#f8f8f2}.turn.selected{background:#f1f6ef}.turn-number{position:absolute;left:12px;top:16px;width:17px;height:17px;border:1px solid #dce4dc;border-radius:50%;display:grid;place-items:center;color:#829087;font:9px var(--mono)}.turn.selected .turn-number{background:var(--green);border-color:var(--green);color:#fff}.speaker{font:10px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--green);margin-bottom:5px}.german{font-size:14px;line-height:1.6;font-weight:600;color:#28372f}.english{font-size:12px;line-height:1.55;color:#77827a;margin-top:5px;padding-top:5px;border-top:1px dashed #e8e9e1}.english.hidden{display:none}.empty{padding:34px 12px;text-align:center;color:#89938b;font-size:12px}.footnote{display:flex;justify-content:space-between;padding:0 15px 14px;color:#a0a79f;font:10px var(--mono)}
@@ -41,9 +42,9 @@
     <section class="workspace" aria-label="Video and transcript">
       <div class="video-column">
         <article class="video-card">
-          <div class="video-frame"><iframe id="youtube-player" src="https://www.youtube-nocookie.com/embed/WBsOY6BDojs?rel=0&playsinline=1" title="Conversation in German B1-B2 with Native Speakers" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></div>
+          <div class="video-frame"><iframe id="youtube-player" src="about:blank" title="Conversation in German B1-B2 with Native Speakers" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><div id="player-hint" class="player-hint" role="status" hidden></div></div>
           <div class="video-meta"><div class="video-meta-top"><h2>Conversation in German B1–B2</h2><a class="open-youtube" href="https://youtu.be/WBsOY6BDojs" target="_blank" rel="noreferrer">Open on YouTube ↗</a></div><p>Milica and Henry talk about living in Spain</p></div>
-          <div class="video-note"><b>Study tip</b> &nbsp;Read a line, listen for it in the video, then say it aloud.</div>
+          <div class="video-note"><b>Study tip</b> &nbsp;Read a line, listen for it in the video, then say it aloud. If YouTube reports that playback is disabled on other websites, use the <strong>Open on YouTube</strong> link above.<span id="embed-status" class="embed-status" role="status" hidden></span></div>
         </article>
       </div>
       <article class="transcript-card">
@@ -81,6 +82,46 @@
       list.querySelectorAll('.known-btn').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const i=+b.dataset.known;known.has(i)?known.delete(i):known.add(i);localStorage.setItem(STORE,JSON.stringify([...known]));render()}));
     }
     function select(index){selected=Math.max(0,Math.min(lines.length-1,index));render();const active=list.querySelector('.selected');if(active)active.scrollIntoView({block:'nearest',behavior:'smooth'})}
+    function setVideo(video,label){
+      const player=document.getElementById('youtube-player');
+      player.title=label;
+      player.referrerPolicy='strict-origin-when-cross-origin';
+      if(location.protocol==='file:'){
+        player.hidden=true;
+        const localUrl=new URL('http://127.0.0.1:8766/lengura-reader/outputs/index.html');
+        localUrl.search=location.search;
+        const hint=document.getElementById('player-hint');
+        hint.hidden=false;
+        hint.innerHTML=`YouTube needs the reader opened over local HTTP. Run <code>./outputs/start-local.sh</code> in a terminal, then open the local reader below.<a href="${esc(localUrl.href)}">Open local reader</a>`;
+        return;
+      }
+      const embed=new URL(`https://www.youtube-nocookie.com/embed/${video}`);
+      embed.searchParams.set('rel','0');
+      embed.searchParams.set('playsinline','1');
+      embed.searchParams.set('enablejsapi','1');
+      if(location.protocol==='http:'||location.protocol==='https:')embed.searchParams.set('origin',location.origin);
+      player.hidden=false;
+      player.src=embed.toString();
+      if(['WBsOY6BDojs','c3qLm_QBtrM','rKhZjWs8MYQ'].includes(video)){
+        const status=document.getElementById('embed-status');
+        status.innerHTML=`YouTube reports that the owner has disabled embedding for this video. <a href="https://www.youtube.com/watch?v=${encodeURIComponent(video)}" target="_blank" rel="noopener">Watch on YouTube ↗</a>`;
+        status.hidden=false;
+      }else{
+        document.getElementById('embed-status').hidden=true;
+      }
+    }
+    function onYouTubeIframeAPIReady(){
+      new YT.Player('youtube-player',{events:{onError(event){
+        const status=document.getElementById('embed-status');
+        const code=event.data;
+        let message='YouTube could not play this video in the embedded player.';
+        if(code===101||code===150)message='The video owner has disabled playback on other websites.';
+        else if(code===153)message='YouTube did not receive the reader’s HTTP referrer. Open the app from its localhost address.';
+        else if(code===100)message='This video is unavailable or private.';
+        status.innerHTML=`${esc(message)} <a href="${esc(document.querySelector('.open-youtube').href)}" target="_blank" rel="noopener">Open on YouTube ↗</a>`;
+        status.hidden=false;
+      }}});
+    }
     async function init(){
       try{
         const params=new URLSearchParams(location.search);
@@ -88,11 +129,12 @@
         const title=params.get('title');
         const source=params.get('page');
         const allowedVideo=/^[A-Za-z0-9_-]{11}$/;
+        const activeVideo=video||'WBsOY6BDojs';
+        if(!allowedVideo.test(activeVideo))throw Error('Invalid YouTube video ID.');
+        if(!video)setVideo(activeVideo,'Conversation in German B1-B2 with Native Speakers');
         if(video){
-          if(!allowedVideo.test(video)) throw Error('Invalid YouTube video ID.');
           const label=title||'German conversation';
-          document.getElementById('youtube-player').src=`https://www.youtube-nocookie.com/embed/${video}?rel=0&playsinline=1`;
-          document.getElementById('youtube-player').title=label;
+          setVideo(video,label);
           document.querySelector('.open-youtube').href=`https://www.youtube.com/watch?v=${encodeURIComponent(video)}`;
           document.querySelector('.video-meta h2').textContent=label;
           document.getElementById('page-title').textContent=label;
@@ -131,6 +173,9 @@
     document.getElementById('print-notes').addEventListener('click',()=>window.print());
     document.getElementById('reset-progress').addEventListener('click',()=>{if(confirm('Clear your learned-line marks and Franklin notes on this browser?')){known.clear();localStorage.removeItem(STORE);note.value='';localStorage.removeItem('lengura-franklin-notes-v1');render()}});
     init();
+    if(location.protocol!=='file:'){
+      const api=document.createElement('script');api.src='https://www.youtube.com/iframe_api';document.head.appendChild(api);
+    }
   </script>
 </body>
 </html>
