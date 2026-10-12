@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#f5f4ed" />
+  <title>Lengura — Listen & Read</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap');
+    :root{--paper:#f5f4ed;--white:#fffefa;--ink:#182b25;--muted:#78837b;--line:#e4e5dc;--green:#25634c;--mint:#e7f0e9;--gold:#c78b43;--serif:'Fraunces',Georgia,serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace}
+    *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px} button,input{font:inherit} button{cursor:pointer}
+    .topbar{height:68px;padding:0 clamp(20px,4vw,64px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(255,254,250,.74)}
+    .brand{display:flex;align-items:center;gap:11px;font-size:16px;font-weight:700;letter-spacing:-.04em}.brand-mark{display:grid;place-items:center;width:31px;height:31px;border-radius:9px;background:var(--green);color:#fff;font-size:17px}.brand span:last-child{color:#7e887f;font-weight:500}
+    .top-right{display:flex;align-items:center;gap:10px;color:#66736b;font-size:12px}.avatar{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;background:#e9e2d2;color:#745832;font-weight:700}
+    main{max-width:1460px;margin:auto;padding:30px clamp(20px,4vw,64px) 48px}.crumb{display:flex;align-items:center;gap:9px;color:#859087;font-size:12px;margin-bottom:23px}.crumb strong{color:#4c5a51;font-weight:600}.crumb .dot{font-size:16px;color:#b9c0b8}
+    .heading{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:23px}.eyebrow{font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin:0 0 8px}.heading h1{font:600 clamp(26px,3.2vw,39px)/1.1 var(--serif);letter-spacing:-.035em;margin:0}.subhead{margin:9px 0 0;color:#7c867e;font-size:13px}.level{white-space:nowrap;padding:8px 12px;border:1px solid #d8e1d8;border-radius:999px;background:#eef3ec;color:var(--green);font:11px var(--mono)}
+    .workspace{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr);gap:18px;align-items:start}.video-column{position:sticky;top:18px;min-width:0}.video-card,.transcript-card{min-width:0;background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 6px 24px rgba(36,54,43,.035)}
+    .video-frame{position:relative;aspect-ratio:16/9;background:#13231d}.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.video-meta{padding:17px 19px 16px}.video-meta-top{display:flex;justify-content:space-between;align-items:center;gap:10px}.video-meta h2{font:600 17px var(--serif);margin:0;letter-spacing:-.02em}.open-youtube{font-size:11px;color:var(--green);text-decoration:none;font-weight:600}.open-youtube:hover{text-decoration:underline}.video-meta p{margin:6px 0 0;color:#818a82;font-size:12px}.video-note{border-top:1px solid var(--line);padding:12px 19px;color:#7d877f;font-size:11px;line-height:1.55}.video-note b{color:#4d5a50;font-weight:600}
+    .study-tools{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 15px;border-bottom:1px solid var(--line);background:#fdfcf7}.count{font:11px var(--mono);color:#7b867e}.count b{color:var(--green);font-weight:500}.tool-actions{display:flex;align-items:center;gap:7px}.tool-btn{border:1px solid var(--line);background:#fffefa;color:#5e6b61;border-radius:8px;padding:7px 10px;font-size:11px}.tool-btn:hover{border-color:#b7cbbd;color:var(--green)}
+    .search-wrap{position:relative;padding:12px 15px 2px}.search-wrap:before{content:'⌕';position:absolute;left:27px;top:20px;color:#89938b;font-size:17px}.search{width:100%;border:1px solid #e7e8e0;background:#faf9f3;border-radius:9px;padding:10px 12px 10px 33px;outline:none;font-size:12px;color:var(--ink)}.search:focus{border-color:#98b6a3;box-shadow:0 0 0 3px #e7f0e9}
+    .turn-list{padding:8px 15px 15px;max-height:calc(100vh - 270px);min-height:380px;overflow:auto;scrollbar-color:#d8ded7 transparent;scrollbar-width:thin}.turn{position:relative;padding:13px 13px 12px 38px;border-bottom:1px solid #eff0ea;border-radius:9px;transition:background .18s;cursor:pointer}.turn:last-child{border-bottom:0}.turn:hover{background:#f8f8f2}.turn.selected{background:#f1f6ef}.turn-number{position:absolute;left:12px;top:16px;width:17px;height:17px;border:1px solid #dce4dc;border-radius:50%;display:grid;place-items:center;color:#829087;font:9px var(--mono)}.turn.selected .turn-number{background:var(--green);border-color:var(--green);color:#fff}.speaker{font:10px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--green);margin-bottom:5px}.german{font-size:14px;line-height:1.6;font-weight:600;color:#28372f}.english{font-size:12px;line-height:1.55;color:#77827a;margin-top:5px;padding-top:5px;border-top:1px dashed #e8e9e1}.english.hidden{display:none}.empty{padding:34px 12px;text-align:center;color:#89938b;font-size:12px}.footnote{display:flex;justify-content:space-between;padding:0 15px 14px;color:#a0a79f;font:10px var(--mono)}
+    .source{color:inherit;text-decoration:underline;text-decoration-color:#c3c9c1;text-underline-offset:2px}.source:hover{color:var(--green)}
+    @media(max-width:650px){.workspace{grid-template-columns:1fr}.video-column{position:static}.turn-list{max-height:52vh;min-height:320px}.heading{align-items:flex-start}.video-card{max-width:820px}}
+    @media(max-width:520px){.topbar{height:58px;padding:0 17px}.top-right .helper{display:none}main{padding:21px 15px 32px}.crumb{margin-bottom:17px}.heading{display:block;margin-bottom:17px}.level{display:inline-block;margin-top:13px}.workspace{gap:13px}.video-card,.transcript-card{border-radius:13px}.video-meta{padding:13px}.video-meta h2{font-size:15px}.study-tools{padding:10px}.tool-btn{padding:7px 8px}.turn-list{padding:7px 9px 12px}.turn{padding:11px 8px 10px 34px}.turn-number{left:8px}.german{font-size:13px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">L</span><span>lengura</span><span>· reader</span></div>
+    <div class="top-right"><a class="source" href="./catalog.html">Browse lesson library ↗</a><span class="avatar">S</span></div>
+  </header>
+  <main>
+    <nav class="crumb" aria-label="Breadcrumb"><span>Library</span><span class="dot">›</span><span>Conversations</span><span class="dot">›</span><strong>Spain & everyday life</strong></nav>
+    <section class="heading">
+      <div><p class="eyebrow">Listen · Read · Understand</p><h1>Life in Spain, through two voices</h1><p class="subhead">Opening excerpt · 18 turns from the full Lengura transcript. German first, English just below.</p></div>
+      <span class="level">GERMAN · B1–B2</span>
+    </section>
+    <section class="workspace" aria-label="Video and transcript">
+      <div class="video-column">
+        <article class="video-card">
+          <div class="video-frame"><iframe src="https://www.youtube.com/embed/WBsOY6BDojs?rel=0" title="Conversation in German B1-B2 with Native Speakers" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="video-meta"><div class="video-meta-top"><h2>Conversation in German B1–B2</h2><a class="open-youtube" href="https://youtu.be/WBsOY6BDojs" target="_blank" rel="noreferrer">Open on YouTube ↗</a></div><p>Milica and Henry talk about living in Spain</p></div>
+          <div class="video-note"><b>Study tip</b> &nbsp;Read a line, listen for it in the video, then say it aloud.</div>
+        </article>
+      </div>
+      <article class="transcript-card">
+        <div class="study-tools"><span class="count"><b id="visible-count">0</b> excerpt lines · <b id="position">1</b> selected</span><div class="tool-actions"><button class="tool-btn" id="translation-toggle" type="button">Hide translations</button><button class="tool-btn" id="prev" type="button" aria-label="Previous line">←</button><button class="tool-btn" id="next" type="button" aria-label="Next line">→</button></div></div>
+        <label class="search-wrap"><input id="search" class="search" type="search" placeholder="Find a word or phrase…" aria-label="Search transcript" /></label>
+        <div class="turn-list" id="turn-list" tabindex="0" aria-label="Transcript lines"></div>
+        <div class="footnote"><span>TRANSLATIONS · ENGLISH</span><span><a class="source" href="https://lengura.de/conversation-in-german-b1-b2-with-native-speakers/" target="_blank" rel="noreferrer">Transcript source ↗</a></span></div>
+      </article>
+    </section>
+  </main>
+  <script>
+    // Opening excerpt from Lengura's published transcript; English translations are provided for this reader.
+    const lines = [
+      {speaker:'Henry',de:'Milica, ich habe gehört, dass du einige Monate in Spanien gelebt hast. Stimmt das?',en:'Milica, I heard that you lived in Spain for a few months. Is that right?'},
+      {speaker:'Milica',de:'Ja, das stimmt. Ich habe drei Monate lang in Valencia, in Spanien gelebt.',en:'Yes, that’s right. I lived in Valencia, Spain for three months.'},
+      {speaker:'Henry',de:'Wow, Valencia! Wenn man an Spanien denkt, dann denkt man vielleicht an Madrid oder Barcelona oder Sevilla. Warum hast du dich für Valencia entschieden?',en:'Wow, Valencia! When people think of Spain, they might think of Madrid, Barcelona, or Seville. Why did you choose Valencia?'},
+      {speaker:'Milica',de:'Also, ich war ganz sicher, dass ich in eine Stadt gehen wollte, die auch Strand und Meer und Sonne hat, weil ich das zu Hause nicht habe ... in Deutschland.',en:'Well, I was sure I wanted to go to a city with a beach, the sea, and sunshine, because I don’t have that at home … in Germany.'},
+      {speaker:'Milica',de:'Und genau! Barcelona war für mich leider keine Wahl, weil Barcelona einfach zu groß ist ... zu touristisch und ich wollte in einer Stadt leben, die einfach ein bisschen kleiner ist ... ein bisschen intimer und ja, dann habe ich mich für Valencia entschieden.',en:'And exactly! Barcelona unfortunately wasn’t an option for me, because it’s simply too big … too touristy. I wanted to live in a city that was a little smaller … a little more intimate, so I chose Valencia.'},
+      {speaker:'Henry',de:'Und du sagst, du wolltest in einer Stadt leben, die kleiner ist als Barcelona. Weißt du ungefähr, wie viele Menschen in Valencia leben?',en:'And you say you wanted to live in a city smaller than Barcelona. Do you know roughly how many people live in Valencia?'},
+      {speaker:'Milica',de:'Also ungefähr ... ein bisschen weniger als eine Million, würde ich sagen ... so 800.000 bis 900.000.',en:'Roughly … a little less than a million, I’d say … around 800,000 to 900,000.'},
+      {speaker:'Henry',de:'Das ist ja trotzdem immer noch eine sehr große Stadt.',en:'That’s still a very big city, though.'},
+      {speaker:'Milica',de:'Genau, ja! Also, ich wollte schon, dass es eine größere Stadt ist als meine Heimatstadt in Deutschland, weil … ich komme aus Mainz. Mainz ist sehr klein und ich wollte eine Stadt haben, die ein bisschen größer ist, aber eben nicht zu groß und Valencia war da eine gute Wahl.',en:'Exactly! I did want it to be a bigger city than my hometown in Germany, because … I’m from Mainz. Mainz is very small, and I wanted a city that was a little bigger, but not too big. Valencia was a good choice for that.'},
+      {speaker:'Henry',de:'Ein guter Kompromiss also?!',en:'So, a good compromise?!'},
+      {speaker:'Milica',de:'Genau, richtig!',en:'Exactly, that’s right!'},
+      {speaker:'Henry',de:'Und du hast gesagt, Sonne und Strand sind dir sehr wichtig. Gibt es noch andere Dinge, die dir in Valencia wichtig sind oder andere Dinge, die dir positiv aufgefallen sind ... in Valencia.',en:'And you said sunshine and the beach are very important to you. Are there other things that matter to you in Valencia, or anything else you particularly liked there?'},
+      {speaker:'Milica',de:'Ja, ganz viele Dinge, also ich war sehr überrascht von dem wunderschönen historischen Stadtzentrum mit ganz vielen alten Gebäuden ...',en:'Yes, lots of things. I was really surprised by the beautiful historic city center, with all its old buildings …'},
+      {speaker:'Henry',de:'Oh, das liebe ich auch!',en:'Oh, I love that too!'},
+      {speaker:'Milica',de:'Ja, super schön! ... kann man abends mal spazieren gehen, einen Wein trinken gehen. Es hat eine ganz tolle Atmosphäre, Valencia … ganz einladend und irgendwie intim, wie gesagt.',en:'Yes, it’s really beautiful! … You can go for a walk in the evening or have a glass of wine. Valencia has a wonderful atmosphere … very welcoming and, as I said, somehow intimate.'},
+      {speaker:'Milica',de:'Und ein bisschen außerhalb vom Stadtzentrum gibt es auch so einen modernen Gebäudekomplex, also ganz viele moderne Gebäude nebeneinander und die sehen wirklich aus wie aus so einem Science-Fiction-Film, also total futuristisch und ganz, ganz originell.',en:'And a little outside the city center there’s also a modern complex, with lots of modern buildings next to each other. They really look like something from a science-fiction film—totally futuristic and very original.'},
+      {speaker:'Milica',de:'Also Valencia hat irgendwie alles ... ein bisschen Geschichte, ein bisschen Moderne, den Strand, die Sonne … also, ja.',en:'So Valencia kind of has everything … a little history, a little modernity, the beach, the sunshine … so, yes.'},
+      {speaker:'Henry',de:'Das hört sich wirklich sehr, sehr gut an und interessant.',en:'That really sounds very, very nice and interesting.'}
+    ];
+    const list=document.getElementById('turn-list'), search=document.getElementById('search');
+    let selected=0, showEnglish=true, visible=[];
+    function render(){
+      const q=search.value.trim().toLocaleLowerCase();
+      visible=lines.map((line,index)=>({line,index})).filter(({line})=>!q||`${line.speaker} ${line.de} ${line.en}`.toLocaleLowerCase().includes(q));
+      list.innerHTML=visible.length?visible.map(({line,index})=>`<article class="turn ${index===selected?'selected':''}" data-index="${index}" tabindex="0" role="button" aria-label="Select line ${index+1}"><span class="turn-number">${String(index+1).padStart(2,'0')}</span><div class="speaker">${line.speaker}</div><div class="german">${escapeHtml(line.de)}</div><div class="english ${showEnglish?'':'hidden'}">${escapeHtml(line.en)}</div></article>`).join(''):'<div class="empty">No matching lines. Try another word.</div>';
+      document.getElementById('visible-count').textContent=visible.length;
+      document.getElementById('position').textContent=`${selected+1} / ${lines.length}`;
+      list.querySelectorAll('.turn').forEach(el=>{el.addEventListener('click',()=>select(+el.dataset.index));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(+el.dataset.index)}})});
+    }
+    function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+    function select(index){selected=Math.max(0,Math.min(lines.length-1,index));render();const active=list.querySelector('.selected');if(active)active.scrollIntoView({block:'nearest',behavior:'smooth'})}
+    search.addEventListener('input',render);
+    document.getElementById('translation-toggle').addEventListener('click',e=>{showEnglish=!showEnglish;e.currentTarget.textContent=showEnglish?'Hide translations':'Show translations';render()});
+    document.getElementById('prev').addEventListener('click',()=>select(selected-1));document.getElementById('next').addEventListener('click',()=>select(selected+1));
+    render();
+  </script>
+</body>
+</html>
