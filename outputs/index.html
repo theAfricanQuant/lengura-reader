@@ -83,10 +83,26 @@
       }
       const pairs=[];let i=n,j=m;while(i||j){const from=back[i][j];if(!from)return [{de,en}];const [pi,pj]=from;pairs.unshift({de:deParts.slice(pi,i).join(' '),en:enParts.slice(pj,j).join(' ')});i=pi;j=pj}return pairs;
     }
+    function shortPairChunks(pair){
+      const deWords=pair.de.trim().split(/\s+/).filter(Boolean),enWords=pair.en.trim().split(/\s+/).filter(Boolean);
+      const count=Math.max(1,Math.ceil(deWords.length/10),Math.ceil(enWords.length/10));
+      function partition(words){
+        if(!words.length)return [''];
+        const chunks=[];let start=0;
+        for(let i=1;i<=count;i++){
+          const end=i===count?words.length:Math.round(words.length*i/count);
+          if(end>start)chunks.push(words.slice(start,end).join(' '));
+          start=end;
+        }
+        return chunks;
+      }
+      const de=partition(deWords),en=partition(enWords),n=Math.max(de.length,en.length);
+      return Array.from({length:n},(_,i)=>({de:de[i]||'',en:en[i]||''})).filter(x=>x.de||x.en);
+    }
     function render(){
       const q=search.value.trim().toLocaleLowerCase();
       visible=lines.map((line,index)=>({line,index})).filter(({line})=>!q||`${line.speaker} ${line.de} ${line.en}`.toLocaleLowerCase().includes(q));
-      list.innerHTML=visible.length?visible.map(({line,index})=>`<article class="turn ${index===selected?'selected':''} ${known.has(index)?'known':''}" data-index="${index}" tabindex="0" role="button" aria-label="Select line ${index+1}"><span class="turn-number">${String(index+1).padStart(2,'0')}</span><div class="speaker">${esc(line.speaker)} <button class="known-btn" data-known="${index}" aria-label="Mark as learned">${known.has(index)?'✓ learned':'Mark learned'}</button></div>${pairedChunks(line.de,line.en,line.pairs).map(pair=>`<div class="pair-chunk"><div class="german">${esc(pair.de)}</div><div class="english ${showEnglish?'':'hidden'}">${esc(pair.en)}</div></div>`).join('')}</article>`).join(''):'<div class="empty">No matching lines. Try another word.</div>';
+      list.innerHTML=visible.length?visible.map(({line,index})=>`<article class="turn ${index===selected?'selected':''} ${known.has(index)?'known':''}" data-index="${index}" tabindex="0" role="button" aria-label="Select line ${index+1}"><span class="turn-number">${String(index+1).padStart(2,'0')}</span><div class="speaker">${esc(line.speaker)} <button class="known-btn" data-known="${index}" aria-label="Mark as learned">${known.has(index)?'✓ learned':'Mark learned'}</button></div>${pairedChunks(line.de,line.en,line.pairs).flatMap(shortPairChunks).map(pair=>`<div class="pair-chunk"><div class="german">${esc(pair.de)}</div><div class="english ${showEnglish?'':'hidden'}">${esc(pair.en)}</div></div>`).join('')}</article>`).join(''):'<div class="empty">No matching lines. Try another word.</div>';
       document.getElementById('visible-count').textContent=visible.length;
       document.getElementById('position').textContent=`${selected+1} / ${lines.length}`;
       document.getElementById('learned-count').textContent=known.size;
